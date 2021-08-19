@@ -1,0 +1,52 @@
+extends typescript
+
+global !p
+def argsToComments(args):
+    prefix = ' * @param'
+    sufix = '@TODO'
+    result = ''
+    argList = args.split(';\n')   
+    for arg in argList:
+        aux = prefix + ' ' + arg.strip() + ' ' + sufix + '\n'
+        result += aux
+    # Don't include the last \n!
+    return result[:-1]
+endglobal
+
+snippet comp "TS React component without props"
+import React from "react";
+
+/**
+ * ${2:description}
+ */
+const ${1:component} = (): JSX.Element => {
+    return (
+        <div id="${3:componentId}">
+            $4
+        </div>
+    );
+};
+endsnippet
+
+snippet comp "TS React component with props"
+import React from "react";
+
+/**
+`!p snip.rv = argsToComments(t[2])`
+ */
+interface Props {
+    ${2:props}
+};
+
+/**
+ * ${3:description}
+ */
+const ${1:component} = (props: Props): JSX.Element => {
+    return (
+        <div id="${4:componentId}">
+            $5
+        </div>
+    );
+};
+endsnippet
+

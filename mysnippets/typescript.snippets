@@ -1,0 +1,52 @@
+global !p
+def argsToComments(args):
+    prefix = ' * @param'
+    sufix = '@TODO'
+    result = ''
+    argList = args.split(',')   
+    for arg in argList:
+        aux = prefix + ' ' + arg.strip() + ' ' + sufix + '\n'
+        result += aux
+    # Don't include the last \n!
+    return result[:-1]
+endglobal
+
+snippet fn "TS arrow function without assignment"
+    (${1:args}): ${2:rType} => {
+        $3
+    }
+endsnippet
+snippet fna "TS arrow function with assignment"
+    const ${1:fn} = (${2:args}): ${3:rType} => {
+        $4
+    }
+endsnippet
+snippet fnac "TS function with assignment and comments"
+    /**
+     * ${4:description}
+     *
+    `!p snip.rv = argsToComments(t[2])`
+     * @returns $3
+     */
+    const ${1:fn} = (${2:args}): ${3:rType} => {
+        $5
+    }
+endsnippet
+
+snippet exd "TS export default"
+    export default $1;
+endsnippet
+
+snippet excstr "TS string constant assignment"
+    export const ${1:name}: String = "$3"
+endsnippet
+
+snippet excnum "TS number constant assignment"
+    export const ${1:name}: Number = $3
+endsnippet
+
+snippet cb "TS comment block"
+    /**
+     * $1
+     */
+endsnippet
